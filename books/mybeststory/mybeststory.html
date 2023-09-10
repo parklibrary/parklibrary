@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>'My Best Story' by Toby Sherman | Park Library</title>
+    <meta charset="UTF-8">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../favicon/favicon-16x16.png">
+    <link rel="manifest" href="../../favicon/site.webmanifest">
+    <meta name="viewport" content="width=device-width">
+    
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="../../js/turn.min.js"></script>
+    <script type="text/javascript" src="../../js/bookambiance.js"></script>
+
+    <style>
+        body::before {
+            content: "";
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+
+        body::before {
+            background-image: var(--random-bg-url);
+        }
+
+        body {
+            overflow: hidden;
+        }
+
+        header {
+            width: 100%;
+            z-index: 999;
+        }
+
+        .media {
+            text-align: center;
+        }
+
+        .credits {
+            font-size: 15px;
+            font-family: 'Source Serif Pro', serif;
+            background-color: #fff;
+            color: #000;
+            padding: 5px;
+        }
+
+        audio {
+            margin: 0;
+            padding: 0;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .wrapper {
+            padding-top: 2.5vh;
+            align-items: center;
+            display: flex;
+            height: 100%;
+            justify-content: center;
+            max-width: 100vh;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .aspect {
+            flex-grow: 1;
+            height: 0;
+            padding-top: 70%;
+            position: relative;
+            width: 100%;
+        }
+
+        .aspect-inner {
+            bottom: 0;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .flipbook {
+            height: 100%;
+            width: 100%;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .flipbook .page {
+            height: 100%;
+            width: 100%;
+        }
+
+        .flipbook .page img {
+            max-width: 100%;
+            height: 100%;
+        }
+
+        .flipbook .shadow {
+            -webkit-transition: -webkit-box-shadow 0.5s;
+            -moz-transition: -moz-box-shadow 0.5s;
+            -o-transition: -webkit-box-shadow 0.5s;
+            -ms-transition: -ms-box-shadow 0.5s;
+
+            -webkit-box-shadow: 0 0 20px #ccc;
+            -moz-box-shadow: 0 0 20px #ccc;
+            -o-box-shadow: 0 0 20px #ccc;
+            -ms-box-shadow: 0 0 20px #ccc;
+            box-shadow: 0 0 20px #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="media">
+            <br>
+            <audio id="random-audio" controls loop>
+            </audio>
+            <br>
+            <p><span class="credits"><i>'My Best Story'</i> (2023) by Toby Sherman</span></p>
+        </div>
+    </header>
+    <div class="wrapper">
+        <div class="aspect">
+            <div class="aspect-inner">
+                <div class="flipbook" id="flipbook">
+                    <div class="page"><img src="pages/cover.png" draggable="false" alt="" /></div>
+                    <div class="page" style="background-color:#fff;"></div>
+                    <div class="page"><img src="pages/page-01.png" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-02.png" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-03.png" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-04.png" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-05.png" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-06.png" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-07.png" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-08.png" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-09.png" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/back.png" draggable="false" alt="" /></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var flipbookEL = document.getElementById('flipbook');
+        window.addEventListener('resize', function (e) {
+            flipbookEL.style.width = '';
+            flipbookEL.style.height = '';
+            $(flipbookEL).turn('size', flipbookEL.clientWidth, flipbookEL.clientHeight);
+        });
+        $(flipbookEL).turn({
+            autoCenter: true
+        });
+    </script>
+</body>
+
+</html>
