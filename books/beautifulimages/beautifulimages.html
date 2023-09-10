@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>'Beautiful Images' by Toby Sherman | Park Library</title>
+    <meta charset="UTF-8">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../favicon/favicon-16x16.png">
+    <link rel="manifest" href="../../favicon/site.webmanifest">
+    <meta name="viewport" content="width=device-width">
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="../../js/turn.min.js"></script>
+    <script type="text/javascript" src="../../js/bookambiance.js"></script>
+
+    <style>
+        body::before {
+            content: "";
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+
+        body::before {
+            background-image: var(--random-bg-url);
+        }
+
+        body {
+            overflow: hidden;
+        }
+
+        header {
+            width: 100%;
+            z-index: 999;
+        }
+
+        .media {
+            text-align: center;
+        }
+
+        .credits {
+            font-size: 15px;
+            font-family: 'Source Serif Pro', serif;
+            background-color: #fff;
+            color: #000;
+            padding: 5px;
+        }
+
+        audio {
+            margin: 0;
+            padding: 0;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .wrapper {
+            padding-top: 2.5vh;
+            align-items: center;
+            display: flex;
+            height: 100%;
+            justify-content: center;
+            max-width: 100vh;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .aspect {
+            height: 0;
+            padding-top: 50%;
+            position: relative;
+            width: 100%;
+        }
+
+        .aspect-inner {
+            bottom: 0;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .flipbook {
+            height: 100%;
+            width: 100%;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .flipbook .page {
+            height: 100%;
+            width: 100%;
+        }
+
+        .flipbook .page img {
+            max-width: 100%;
+            height: 100%;
+        }
+
+        .flipbook .shadow {
+            -webkit-transition: -webkit-box-shadow 0.5s;
+            -moz-transition: -moz-box-shadow 0.5s;
+            -o-transition: -webkit-box-shadow 0.5s;
+            -ms-transition: -ms-box-shadow 0.5s;
+            -webkit-box-shadow: 0 0 20px #ccc;
+            -moz-box-shadow: 0 0 20px #ccc;
+            -o-box-shadow: 0 0 20px #ccc;
+            -ms-box-shadow: 0 0 20px #ccc;
+            box-shadow: 0 0 20px #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="media">
+            <br>
+            <audio id="random-audio" controls loop>
+            </audio>
+            <br>
+            <p><span class="credits"><i>'Beautiful Images'</i> (2023) by Toby Sherman</span></p>
+        </div>
+    </header>
+    <div class="wrapper">
+        <div class="aspect">
+            <div class="aspect-inner">
+                <div class="flipbook" id="flipbook">
+                    <div class="page"><img src="pages/cover.jpg" draggable="false" alt="" /></div>
+                    <div class="page" style="background-color:#fff;"></div>
+                    <div class="page"><img src="pages/page-01.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-02.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-03.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-04.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-05.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-06.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-07.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-08.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-09.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-10.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-11.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-12.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-13.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-14.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-15.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-16.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-17.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-18.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-19.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-20.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-21.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-22.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-23.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-24.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-25.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-26.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-27.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-28.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-29.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-30.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-31.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-32.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-33.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-34.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-35.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-36.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-37.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-38.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-39.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-40.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-41.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-42.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-43.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-44.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-45.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-46.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-47.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-48.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-49.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-50.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-51.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-52.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-53.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-54.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-55.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-56.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-57.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-58.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-59.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-60.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-61.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-62.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-63.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-64.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-65.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-66.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-67.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-68.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-69.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-70.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-71.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-72.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-73.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-74.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-75.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-76.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-77.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-78.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-79.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-80.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/page-81.jpg" draggable="false" alt="" /></div>
+                    <div class="page"><img src="pages/final-page.jpg" draggable="false" alt="" /></div>
+                    <div class="page" style="background-color:#fff;"></div>
+                    <div class="page"><img src="pages/back.jpg" draggable="false" alt="" /></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var flipbookEL = document.getElementById('flipbook');
+        window.addEventListener('resize', function (e) {
+            flipbookEL.style.width = '';
+            flipbookEL.style.height = '';
+            $(flipbookEL).turn('size', flipbookEL.clientWidth, flipbookEL.clientHeight);
+        });
+        $(flipbookEL).turn({
+            autoCenter: true
+        });
+    </script>
+</body>
+
+</html>
