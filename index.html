@@ -1,6 +1,504 @@
-<div style="font-size:30px">
-<a href="https://gregorycotton.ca">greg</a> is building a library&nbsp;&#129299;
-<br>
-<br>
-if you have a book you think is library-worthy, send an <a href="mailto:cotton.gregory@proton.me">email</a>.
-</div>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Park Library</title>
+    <meta charset="UTF-8">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <meta name="viewport" content="width=device-width">
+
+    <!-- Primary stylesheet -->
+    <link rel="stylesheet" href="css/indexstyle.css">
+
+    <!-- Book data table -->
+    <script src="https://code.jquery.com/jquery-3.6.4.js"
+        integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/libraryTable.css" />
+    <script src="js/jquery.dataTables.js"></script>
+    <script src="js/dataTables.responsive.min.js"></script>
+
+    <!-- Bulletin board -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-firestore-compat.js"></script>
+
+    <!-- Library card generator -->
+    <script src="js/pdf-lib@1.4.0"></script>
+    <script src="js/downloadjs@1.4.7"></script>
+
+    <style>
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(18, 25px);
+            grid-template-rows: repeat(22, 25px);
+            grid-gap: 0.5px;
+        }
+
+        .cell {
+            font-family: Times, serif;
+            font-size: 40px;
+            font-weight: bold;
+            color: #34B06A;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="page-content">
+        <pre>
+   ,   ,
+  /////|
+ ///// |
+|~~~|  |
+|===|  |
+|   |  |
+|   |  |
+|   | /
+|===|/
+'---'
+        </pre>
+
+        <p>The <i>Park Library</i> is an online outdoor library that houses books, zines and art.</p>
+        <br>
+        <ul>
+            <li><button class="tablinks" onclick="openTab(event, 'books')">All titles</button></li>
+            <li><button class="tablinks" onclick="openTab(event, 'bulletin')">Bulletin board</button></li>
+            <li><button class="tablinks" onclick="openTab(event, 'registration')">Registration</button></li>
+            <li><button class="tablinks" onclick="openTab(event, 'about')">About</button></li>
+        </ul>
+        <br>
+
+        <!-- All titles -->
+        <div id="books" class="tabcontent">
+            <br>
+            <h1>All titles</h1>
+            <br>
+            <p>Browse the library and sort or search by author, title, or date.</p>
+            <br>
+            <p style="color: #FF0000;">We are looking for new books. If you or a friend have something you'd like shared, <a style="color: #FF0000;" href="mailto:cotton.gregory@proton.me">send an email</a>!</p>
+            <br>
+            <table id="library" class="" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author(s)</th>
+                        <th>Year</th>
+                        <th>Tags</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a target="_blank" class="link" href="books/beautifulimages/beautifulimages.html">Beautiful
+                                Images</a></td>
+                        <td><a target="_self" class="link" href="contributors/tobysherman.html">Toby Sherman</a></td>
+                        <td>2023</td>
+                        <td>Art, Illustration</td>
+                    </tr>
+                    <tr>
+                        <td><a target="_blank" class="link" href="books/mybeststory/mybeststory.html">My Best Story</a>
+                        </td>
+                        <td><a target="_self" class="link" href="contributors/tobysherman.html">Toby Sherman</a></td>
+                        <td>2023</td>
+                        <td>Art, Illustration</td>
+                    </tr>
+                    <tr>
+                        <td><a target="_blank" class="link" href="books/unclemag/unclemag.html">Uncle Magazine Summer
+                                2023</a></td>
+                        <td><a target="_self" class="link" href="contributors/fredtombs.html">Fred Tombs</a></td>
+                        <td>2023</td>
+                        <td>Magazine, Editorial, Parody, Comedy</td>
+                    </tr>
+                    <!--
+                    <tr>
+                        <td><a target="_blank" class="link" href="#">Protest Pictures</a></td>
+                        <td><a target="_self" class="link" href="contributors/samfoss.html">Sam Foss</a></td>
+                        <td>2019</td>
+                        <td>Photography, Documentary, Non-fiction</td>
+                    </tr>
+                    -->
+                    <!--
+                    <tr>
+                        <td><a target="_blank" class="link" href="#">Poems</a></td>
+                        <td><a target="_self" class="link" href="contributors/zaidamer.html">Zaid Amer</a></td>
+                        <td>2019</td>
+                        <td>Poetry, Art, Writing</td>
+                    </tr>
+                    -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Bulletin board -->
+        <div id="bulletin" class="tabcontent">
+            <br>
+            <h1>Bulletin board</h1>
+            <br>
+            <p>Pin news or a public message to the library's bulletin board (max 200 characters).</p>
+            <br>
+            <form id="comments">
+                <div class="mb-3" style="padding-bottom:5px">
+                    <label for="name" class="form-label">Name:</label>
+                    <br>
+                    <input id="bulletinName" name="bulletinName" type="text" class="form-control" autocomplete="off"
+                        style="height:25px;" maxlength="25" required>
+                </div>
+                <div class="mb-3" style="padding-bottom: 5px;">
+                    <label id="colorLabel" for="color" class="form-label">Color:</label>
+                    <br>
+                    <input id="color" name="color" type="text" class="form-control" required readonly
+                        style="display: none;">
+                    <div id="colorPickerContainer" class="color-picker-container"></div>
+                </div>
+                <div class="mb-3">
+                    <label for="comment" class="form-label">Message:</label>
+                    <br>
+                    <textarea id="comment" name="comment" class="form-control" style="height:50px;" maxlength="200"
+                        required></textarea>
+                </div>
+                <button type="submit" class="btn btn-outline-primary bulletin">Pin to bulletin board</button>
+                <br>
+                <br>
+                <br>
+            </form>
+            <div id="bulletinContainer"></div>
+        </div>
+
+        <!-- Registration -->
+        <div id="registration" class="tabcontent">
+            <br>
+            <h1>Registration</h1>
+            <br>
+            <p>Provide your chosen name below (max 20 characters) to be given a library card for the Park Library. Each card is generative and unique!</p>
+            <br>
+            <form id="cardgen" onsubmit="modifyPdf(event); event.preventDefault();">
+                <div class="mb-3" style="padding-bottom: 5px;">
+                    <label for="name" class="form-label">Name:</label>
+                    <br>
+                    <input type="text" id="cardName" autocomplete="off" style="height:25px;" maxlength="25" required>
+                </div>
+                <button type="submit"
+                    class="btn btn-outline-primary bulletin">Download library card</button>
+            </form>
+            <br>
+            <p>Cards will be automtically downloaded as a PDF file.</p>
+            <br>
+        </div>
+
+        <!-- About -->
+        <div id="about" class="tabcontent">
+            <br>
+            <h1>About</h1>
+            <br>
+            <p>The Park Library plays host to books, zines and art. All media is exhibited with
+                an accompanying audio file of a park so you can read outside wherever you are, no matter the weather.
+            </p>
+
+            <br>
+            <p>Everything in the library is here with the express permission of the respective artists, who retain all
+                rights over their work. If you have a
+                reccomendation or media of your own that you'd like to submit for consideration, <a target="_blank"
+                    class="link" href="mailto:cotton.gregory@proton.me">send an email</a>. There is no theme that needs to be
+                followed,
+                and we'll do our best to get back to you if you as soon as possible.</p>
+            <br>
+            <p>The Park Library is built and maintained by <a target="_blank" class="link"
+                    href="https://gregorycotton.ca">Greg</a>, to whom you can reach out to with questions/suggestions&#9786;&#xFE0E;</p>
+        </div>
+    </div>
+
+    <!-- Library set up -->
+    <script>
+        function openTab(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+
+    <!-- dataTables set up -->
+    <script>
+        $(document).ready(function () {
+            var dataTable = $('#library').DataTable({
+                order: [[0, 'asc']],
+                searching: true,
+                info: false,
+                paging: false,
+                responsive: true,
+
+                columnDefs: [
+                    {
+                        targets: 3,
+                        searchable: true,
+                        visible: false
+                    }
+                ]
+            });
+        });
+    </script>
+
+    <!-- Bulletin board set up -->
+    <script>
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBbfy0XcB3w_Q8ulMV9wIm9jcEAcJFhzDU",
+            authDomain: "park-library.firebaseapp.com",
+            projectId: "park-library",
+            storageBucket: "park-library.appspot.com",
+            messagingSenderId: "875578621260",
+            appId: "1:875578621260:web:4a20a2ed0fcf59601c23e9"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+
+        const db = firebase.firestore();
+        const form = document.getElementById('comments');
+        const bulletinContainer = document.getElementById('bulletinContainer');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = form.bulletinName.value;
+            const comment = form.comment.value;
+            const color = form.color.value;
+
+            db.collection('comments').add({
+                name: name,
+                time: firebase.firestore.Timestamp.now(),
+                comment: comment,
+                color: color
+            })
+                .then(() => {
+                    form.reset();
+                })
+                .catch((error) => {
+                    console.error('Error adding comment: ', error);
+                });
+        });
+
+        db.collection('comments')
+            .orderBy('time', 'desc')
+            .onSnapshot((snapshot) => {
+                bulletinContainer.innerHTML = '';
+
+                snapshot.forEach((doc) => {
+                    const comment = doc.data();
+                    const commentElement = document.createElement('div');
+                    commentElement.classList.add('mb-4');
+                    commentElement.innerHTML = `
+                <small class="text-muted">${comment.time.toDate().toLocaleString()}</small>
+                <div class="bg-light p-2">
+                    <p><strong style="background-color: ${comment.color};">${comment.name}</strong> - ${comment.comment}</p>
+                </div>
+                <hr class="my-2">
+            `;
+
+                    bulletinContainer.appendChild(commentElement);
+                });
+            });
+    </script>
+
+    <!-- Colour picker -->
+    <script>
+        const colorInput = document.getElementById('color');
+        const colorLabel = document.getElementById('colorLabel');
+        const colorPickerContainer = document.getElementById('colorPickerContainer');
+        const validColors = [
+            { hexCode: '#E4EA28', name: 'Yellow' },
+            { hexCode: '#34B06A', name: 'Green' },
+            { hexCode: '#EA8D0C', name: 'Orange' },
+            { hexCode: '#E54686', name: 'Pink' },
+            { hexCode: '#2892D0', name: 'Blue' },
+        ];
+        let selectedColor = '';
+
+        validColors.forEach((color) => {
+            const colorSquare = document.createElement('div');
+            colorSquare.className = 'color-square';
+            colorSquare.style.backgroundColor = color.hexCode;
+
+            colorSquare.addEventListener('click', () => {
+                selectedColor = color;
+                updateSelectedColor();
+            });
+
+            colorPickerContainer.appendChild(colorSquare);
+        });
+
+        const updateSelectedColor = () => {
+            const colorSquares = document.querySelectorAll('.color-square');
+
+            colorSquares.forEach((square) => {
+                square.classList.remove('selected');
+            });
+
+            const selectedSquare = document.querySelector(
+                `.color-square[data-color="${selectedColor.hexCode}"]`
+            );
+            if (selectedSquare) {
+                selectedSquare.classList.add('selected');
+            }
+
+            colorInput.value = selectedColor.hexCode;
+
+            colorLabel.innerHTML = `Color: <span style="color: ${selectedColor.hexCode}">${selectedColor.name}</span>`;
+        };
+
+        selectedColor = validColors[0];
+        updateSelectedColor();
+    </script>
+
+    <!-- Library card generator-->
+    <script>
+        const { PDFDocument, StandardFonts, rgb } = PDFLib;
+
+        function generateRiverPath() {
+            const riverPath = [];
+            let x, y;
+
+            const direction = Math.random();
+            if (direction < 0.5) {
+                x = Math.floor(Math.random() * 15);
+                y = 0;
+
+                while (y < 19) {
+                    riverPath.push({ x, y });
+                    if (x < 14) riverPath.push({ x: x + 1, y });
+                    const randomX = Math.random();
+                    if (randomX < 0.33 && x > 1) {
+                        x -= 2;
+                    } else if (randomX < 0.66 && x < 12) {
+                        x += 2;
+                    }
+                    y++;
+                }
+            } else {
+                x = 0;
+                y = Math.floor(Math.random() * 19);
+
+                while (x < 15) {
+                    riverPath.push({ x, y });
+                    if (y < 18) riverPath.push({ x, y: y + 1 });
+                    const randomY = Math.random();
+                    if (randomY < 0.33 && y > 1) {
+                        y -= 2;
+                    } else if (randomY < 0.66 && y < 17) {
+                        y += 2;
+                    }
+                    x++;
+                }
+            }
+
+            return riverPath;
+        }
+
+        async function modifyPdf() {
+            const cardTemplateUrl = 'assets/additional/card-template.pdf';
+            const cardTemplatePdfBytes = await fetch(cardTemplateUrl).then((res) => res.arrayBuffer());
+
+            const cardTemplatePdf = await PDFDocument.load(cardTemplatePdfBytes);
+            const [page] = cardTemplatePdf.getPages();
+
+            const name = document.getElementById('cardName').value;
+
+            const timesBoldFont = await cardTemplatePdf.embedFont(StandardFonts.TimesRomanBold);
+
+            page.drawText(name, {
+                x: 326,
+                y: 56,
+                size: 10,
+                font: timesBoldFont,
+                color: rgb(0, 0, 0),
+            });
+
+            const currentDate = new Date().toLocaleDateString();
+
+            page.drawText(currentDate, {
+                x: 326,
+                y: 130,
+                size: 10,
+                font: timesBoldFont,
+                color: rgb(0, 0, 0),
+            });
+
+            const startX = 10;
+            const startY = 5;
+
+            const cellSize = 20;
+            const fontSize = 40;
+
+            const riverPath = generateRiverPath();
+
+            for (let row = 0; row < 19; row++) {
+                for (let col = 0; col < 15; col++) {
+                    const x = startX + col * cellSize;
+                    const y = startY + row * cellSize;
+
+                    const randomColor = Math.random();
+
+                    const isRiverCell = riverPath.some(
+                        (path) =>
+                            (path.x === col && path.y === row) ||
+                            (path.x === col + 1 && path.y === row)
+                    );
+
+                    if (isRiverCell) {
+                        page.drawText('*', {
+                            x: x,
+                            y: y,
+                            size: fontSize,
+                            font: timesBoldFont,
+                            color: rgb(40 / 255, 146 / 255, 208 / 255),
+                        });
+
+                        if (col < 14) {
+                            page.drawText('*', {
+                                x: x + cellSize,
+                                y: y,
+                                size: fontSize,
+                                font: timesBoldFont,
+                                color: rgb(40 / 255, 146 / 255, 208 / 255),
+                            });
+                        }
+                    } else {
+                        let color = rgb(52 / 255, 176 / 255, 106 / 255);
+                        if (randomColor < 0.02) {
+                            color = rgb(229 / 255, 70 / 255, 134 / 255);
+                        } else if (randomColor < 0.04) {
+                            color = rgb(250 / 255, 247 / 255, 86 / 255);
+                        } else if (randomColor < 0.06) {
+                            color = rgb(234 / 255, 141 / 255, 12 / 255);
+                        }
+
+                        page.drawText('*', {
+                            x: x,
+                            y: y,
+                            size: fontSize,
+                            font: timesBoldFont,
+                            color: color,
+                        });
+                    }
+                }
+            }
+
+            const modifiedPdfBytes = await cardTemplatePdf.save();
+
+            download(modifiedPdfBytes, "parklibrary-id.pdf", "application/pdf");
+
+            document.getElementById('cardgen').reset();
+        }
+    </script>
+</body>
+
+</html>
