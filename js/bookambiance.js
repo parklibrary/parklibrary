@@ -3,6 +3,8 @@ window.onload = function () {
         '01.JPG',
         '02.JPG',
         '03.JPG',
+        '04.JPG',
+        '05.JPG',
     ];
     const randomImage = images[Math.floor(Math.random() * images.length)];
     document.documentElement.style.setProperty('--random-bg-url', `url('../../assets/backgrounds/${randomImage}')`);
